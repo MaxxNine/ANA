@@ -1,0 +1,419 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<Geral>:
+    transition: FadeTransition() 
+    StartScreen:
+    CodeScreen:
+    ChatScreen:
+    AbrirScreen:
+    MusicaScreen:
+    PesquisarScreen:
+    ConversarScreen:
+    DigitarScreen:
+    EmailScreen:
+
+<StartScreen>:
+    name: "start"
+    FloatLayout:
+        canvas:
+            Rectangle:
+                source: 'imagens/ANA.png'
+                size: self.size
+                pos: self.pos
+        Button:
+            font_name: 'achi bold'
+            text: "MANUAL E\nCOMANDOS"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.2, 'center_y':.9}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Button:
+            font_name: 'achi bold'
+            text: "HABILITAR\nCHAT"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.8, 'center_y':.9}
+            font_size: 28
+            on_release: root.manager.current = "chat"
+            on_release: root.tam()
+
+
+<CodeScreen>:
+    name: "code"
+    FloatLayout:
+        id: layout
+        Label:
+            text: "Para ativar um comando,\nbasta dizer uma das palavras-chaves."
+            pos_hint: {'center_x':.5, 'center_y':.9}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 28
+        Label:
+            text: "LISTA DE COMANDOS:"
+            pos_hint: {'center_x':.5, 'center_y':.8}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 28
+        ScrollView:
+            do_scroll_y: True
+            id: sCode
+            size_hint_y: None
+            pos_hint: {'center_x':.8, 'center_y':.5}
+            height: 455
+            GridLayout:
+                id: commands
+                cols: 1
+                padding: 50
+                spacing: 50
+                size_hint: None, None
+                width: 400
+                height: self.minimum_height
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "start"
+        Label:
+            text: "Clique nos comandos para mais informa\u00E7\u00F5es"
+            pos_hint: {'center_x':.8, 'center_y':.1}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 14
+
+
+
+
+<ChatScreen>
+    name: "chat"
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 0
+    ScrollView:
+        do_scroll_y: True
+        id: scroll
+        size_hint_y: None
+        pos_hint: {'center_x':.5, 'center_y':.6}
+        height: 455
+        GridLayout:
+            id: conversa
+            cols: 1
+            padding: 50
+            spacing: 50
+            size_hint: None, None
+            width: 400
+            height: self.minimum_height
+    BoxLayout:
+        size_hint_y: None
+        size_hint_x: None
+        height: 495
+        height: 50
+        TextInput:
+            id: msg
+            size_hint_x: None
+            width: 395
+            multiline: False
+            on_text_validate: root.enviar()
+        Button:
+            id: enviar
+            text: "Enviar"
+            size_hint_x: None
+            width:100
+            on_release: root.enviar()
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.8, 'center_y':.9}
+            font_size: 28
+            on_release: root.mudarTamanho()
+            on_release: root.manager.current = "start"
+
+<AbrirScreen>
+    name: "abrir ou fechar"
+    id: tela_lista
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Label:
+            text: "Para abrir ou fechar um desses programas, basta dizer alguma das palavras brancas!\n As linhas escritas em azul, referem-se ao destino do programa citado anteriormente!"
+            pos_hint: {'center_x':.5, 'center_y':.9}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 21
+        Label:
+            text: "LISTA DE COMANDOS:"
+            pos_hint: {'center_x':.5, 'center_y':.8}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 28
+        ScrollView:
+            do_scroll_y: True
+            id: sCode
+            size_hint_y: None
+            pos_hint: {'center_x':0.5, 'center_y':.475}
+            height: 430
+            GridLayout:
+                id: locais
+                cols: 1
+                padding: 50
+                spacing: 50
+                size_hint: None, None
+                width: 1000
+                height: self.minimum_height
+        Button:
+            text: "Adicionar programas \u00E0 lista"
+            haling: 'center'
+            size_hint: 0.35, 0.07
+            pos_hint: {'center_x':.505, 'center_y':.1}
+            font_size: 18
+            on_release:root.window_add_item()
+
+
+<MusicaScreen>
+    name: "m\u00FAsica"
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Label:
+            text: "Ao dizer a palavra 'm\u00FAsica', a assistente ativa o Modo Player!\nCom a possibilidade de executar os seguintes comandos:"
+            pos_hint: {'center_x':.5, 'center_y':.9}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 28
+        ScrollView:
+            do_scroll_y: True
+            id: scrollMusica
+            size_hint_y: None
+            pos_hint: {'center_x':.7, 'center_y':.5}
+            height: 455
+            GridLayout:
+                id: listaPlayer
+                cols: 1
+                padding: 50
+                spacing: 50
+                halign: 'center'
+                size_hint: None, None
+                width: 600
+                height: self.minimum_height
+        Label:
+            text: "Diga 'sair' para sair do modo m\u00FAsica\nOs comandos em branco s\u00E3o apenas varia\u00E7\u00F5es dos originais."
+            pos_hint: {'center_x':.8, 'center_y':.1}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 14
+
+<PesquisarScreen>
+    name: "pesquisar"
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Label:
+            text: "\u00C9 poss\u00EDvel pesquisar em seu navegador utilizando o comando pesquisar!\nCaso seu YouTube esteja aberto, pesquise no YouTube dizendo 'pesquisar no youtube'!\n Logo em seguida, a assistente ir\u00E1 perguntar o que deseja pequisar!"
+            pos_hint: {'center_x':.5, 'center_y':.6}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 24
+
+<ConversarScreen>
+    name: "conversa"
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Label:
+            markup: True
+            text: "A.N.A. j\u00E1 vem com um pacote de respostas e intera\u00E7\u00F5es!\n[color=fff][size=16]Caso queira adicionar alguma resposta \u00E0 conversa, basta dizer 'Aprenda', e seguir as instru\u00E7\u00F5s dadas pela pr\u00F3pria assistente de navega\u00E7\u00E3o![/size][/color]"
+            pos_hint: {'center_x':.5, 'center_y':.6}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 24
+
+<DigitarScreen>
+    name: "digitar"
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Label:
+            markup: True
+            text: "\u00C9 poss\u00EDvel fazer A.N.A. entrar no modo digita\u00E7\u00E3o ao dizer, 'digitar'\n[color=fff][size=16]Para sair do modo digita\u00E7\u00E3o diga 'parar de digitar'! E para pressionar enter diga somente, 'enviar'![/size][/color]"
+            pos_hint: {'center_x':.5, 'center_y':.6}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 24
+
+<EmailScreen>
+    name: "enviar e-mail"
+    FloatLayout:
+        background_normal: 'imagens/transparent.png'
+        Button:
+            text: "Voltar"
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            background_normal: 'imagens/transparent.png'
+            size_hint: 0.3, 0.1
+            pos_hint: {'center_x':.1, 'center_y':.1}
+            font_size: 28
+            on_release: root.manager.current = "code"
+        Label:
+            markup: True
+            text: "\u00C9 poss\u00EDvel pedir \u00E0 A.N.A. que envie e-mails para voc\u00EA!\n[color=fff][size=16]Primeiro digite seu e-mail e senha nos campos abaixo!\n \u00C9 necess\u00E1rio que voc\u00EA desbloqueie o acesso \u00E0 aplicativos com sistemas de seguran\u00E7a n\u00E3o modernos em seu G-mail![/size][/color]"
+            pos_hint: {'center_x':.5, 'center_y':.8}
+            halign: 'center'
+            color: 0, 0.8, 1, 1
+            font_size: 24
+        TextInput:
+            id: email
+            pos_hint: {'center_x':.5, 'center_y':.6}
+            hint_text: root.e_mail_hint
+            size_hint_x: None
+            size_hint_y: None
+            height: 40
+            width: 395
+            multiline: False
+            on_text_validate: root.confirmar()
+        TextInput:
+            id: passw
+            hint_text: "Senha"
+            password: True
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            size_hint_x: None
+            size_hint_y: None
+            height: 40
+            width: 395
+            multiline: False
+            on_text_validate: root.confirmar()
+        Label:
+            markup: True
+            id: status
+            pos_hint: {'center_x':.5, 'center_y':.4}
+            text: "Status: [color=ff0000]Em espera[/color]"
+            halign: 'center'
+            font_size: 16
+        Button:
+            text: "Confirmar"
+            pos_hint: {'center_x':.5, 'center_y':.3}
+            halign: 'center'
+            size_hint: 0.3, 0.1
+            font_size: 28
+            on_release: root.confirmar()
+        Label:
+            markup: True
+            pos_hint: {'center_x':.5, 'center_y':.1}
+            text: "Ap\u00F3s finalizar estes passos, basta dizer, 'enviar email', e seguir \u00E0s instru\u00E7\u00F5es da Assistente!\nPS: Voc\u00EA pode dizer,'cancela', em qualquer momento e cancelar o envio de e-mail"
+            halign: 'center'
+            font_size: 16
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+
+        FileChooserIconView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Escolher"
+                on_release: root.load(filechooser.path, filechooser.selection)
+            Button:
+                text: "Cancelar"
+                on_release: root.cancel()
+
+<InputDialog>:
+    title: 'Insira o nome pelo qual ser\u00E1 conhecido o programa'
+    size_hint: None, None
+    size: 420, 150
+    auto_dismiss: False
+    text: input.text
+    lb_error: er
+
+    BoxLayout:
+        orientation: 'vertical'
+        pos: self.pos
+        size: root.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Nome do programa: '
+
+            TextInput:
+                id: input
+                multiline: False
+                hint_text:'Novo Programa'
+                on_text: root.error = ''
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Button:
+                text: 'Enter'
+                background_color: 255,0,0,0.9
+                on_press: root._enter(app.some_variable)
+
+            Button:
+                text: 'Cancel'
+                background_color: 0,1,255,0.7
+                on_press: root._cancel()
+
+        Label:
+            id: er
+            foreground_color: 1, 250, 100, 1
+            color: 1, 0.67, 0, 1
+            size_hint_y: None
+            height: 30
+            text: root.error
